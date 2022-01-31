@@ -13,6 +13,7 @@ public record BookDto
     public string Author { get; init; }
 
     [Required]
+    [Range(0, 9999)]
     public decimal Price { get; init; }
 
     public BookDto(string title, string author, decimal price)
