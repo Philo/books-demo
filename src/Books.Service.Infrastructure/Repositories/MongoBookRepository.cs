@@ -1,5 +1,4 @@
-
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
@@ -24,28 +23,18 @@ public class MongoBookRepository : IBookRepository
         _books = mongoDatabase.GetCollection<Book>(settings.Value.BooksCollectionName);
     }
 
-    public Task<Book> Create(Book book)
-    {
-        throw new System.NotImplementedException();
-    }
+    public async Task Create(Book book)
+        => await _books.InsertOneAsync(book);
 
-    public Task Delete(long Id)
-    {
-        throw new System.NotImplementedException();
-    }
+    public async Task Delete(long id)
+        => await _books.DeleteOneAsync(x => x.Id == id);
 
-    public Task<Book> GetBook(long Id)
-    {
-        throw new System.NotImplementedException();
-    }
+    public async Task<Book> GetBook(long id)
+        => await _books.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public Task<IEnumerable<Book>> GetBooks()
-    {
-        throw new System.NotImplementedException();
-    }
+    public IQueryable<Book> GetBooks()
+        => _books.AsQueryable();
 
-    public Task<Book> Update(long Id, Book book)
-    {
-        throw new System.NotImplementedException();
-    }
+    public async Task<Book> Update(Book book)
+        => await _books.FindOneAndReplaceAsync(x => x.Id == book.Id, book);
 }
