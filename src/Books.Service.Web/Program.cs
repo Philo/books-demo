@@ -1,11 +1,26 @@
 using System.Reflection;
+using Books.Service.Web.Responses;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+// Return error message on invalid model
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.InvalidModelStateResponseFactory = context => {
+            return new BadRequestObjectResult(
+                new BadRequestResponse(context.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)))
+                {
+                    ContentTypes = { Application.Json } 
+                };
+            };
+    });
+    
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>{ 
@@ -17,6 +32,7 @@ builder.Services.AddSwaggerGen(options =>{
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
     options.EnableAnnotations();
+    options.CustomSchemaIds(type => type.Name.EndsWith("Dto") ? type.Name.Replace("Dto", string.Empty) : type.Name);
 });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
