@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen(options =>{
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
     options.EnableAnnotations();
+    options.CustomSchemaIds(type => type.Name.EndsWith("Dto") ? type.Name.Replace("Dto", string.Empty) : type.Name);
 });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

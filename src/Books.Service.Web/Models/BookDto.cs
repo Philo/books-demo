@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Books.Service.Web.Models;
 
-public record Book 
+public record BookDto
 {
     private readonly long id;
     public long Id { get { return id; }}
@@ -16,7 +16,7 @@ public record Book
     [Required]
     public double Price { get; init; }
 
-    public Book(string title, string author, double price)
+    public BookDto(string title, string author, double price)
     {
         Title = title;
         Author = author;
