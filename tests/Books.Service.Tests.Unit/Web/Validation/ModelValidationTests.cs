@@ -10,6 +10,18 @@ namespace Books.Service.Tests.Unit.Web.Validation;
 public class ModelValidationTests 
 {
     [Theory, AutoData]
+    public void Book_Should_BeValid(string title, string author, decimal price)
+    {
+        var book = new BookDto(title, author, price);
+        var context = new ValidationContext(book);
+
+        var results = new List<ValidationResult>();
+        var valid = Validator.TryValidateObject(book, context, results, true);
+
+        valid.Should().BeTrue();
+    }
+
+    [Theory, AutoData]
     public void Book_EmptyTitle_Should_BeInvalid(string author, decimal price)
     {
         var book = new BookDto(string.Empty, author, price);
