@@ -13,9 +13,9 @@ public record BookDto
     public string Author { get; init; }
 
     [Required]
-    public double Price { get; init; }
+    public decimal Price { get; init; }
 
-    public BookDto(string title, string author, double price)
+    public BookDto(string title, string author, decimal price)
     {
         Title = title;
         Author = author;
