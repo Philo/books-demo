@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  books-api:
+    container_name: books-api
+    build:
+      context: .
+      dockerfile: ./src/Books.Service.Web/Dockerfile
+    ports:
+      - 8080:80
+
+  mongodb:
+    image: mongo:5.0
+    container_name: books-api-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: books-api
+      MONGO_INITEXTRA_COLLECTIONNAME: Books
+      MONGO_INITDB_ROOT_USERNAME: admin 
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    volumes:
+      - mongodb-data:/data/db
+      - ./scripts/mongo-init:/docker-entrypoint-initdb.d:ro
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: books-api-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
+    
+volumes:
+  mongodb-data: null
