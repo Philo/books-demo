@@ -4,8 +4,7 @@ namespace Books.Service.Web.Models;
 
 public record BookDto
 {
-    private readonly long id;
-    public long Id { get { return id; }}
+    public long Id { get; private set; }
 
     [Required]
     public string Title { get; init; }
