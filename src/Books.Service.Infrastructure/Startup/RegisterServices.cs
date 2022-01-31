@@ -4,7 +4,7 @@ using Books.Service.Infrastructure.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Books.Service.Infrastructure;
+namespace Books.Service.Infrastructure.Startup;
 
 public static class RegisterServices
 {

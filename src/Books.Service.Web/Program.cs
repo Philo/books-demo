@@ -1,5 +1,6 @@
 using System.Reflection;
-using Books.Service.Infrastructure;
+using Books.Service.Core.Interfaces;
+using Books.Service.Infrastructure.Startup;
 using Books.Service.Web.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
@@ -47,6 +48,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.DefaultModelsExpandDepth(1));
 }
+
+builder.Services.AddLogging();
+
+// Seed database
+await new SeedData(app.Services).Run();
 
 app.UseHttpsRedirection();
 

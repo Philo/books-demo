@@ -7,7 +7,7 @@ public record Book
     public string Title { get; init; }
     public string Author { get; init; }
     public decimal Price { get; init;}
-
+    public Book() { }
     public Book(string title, string author, decimal price)
     {
         Title = title;
