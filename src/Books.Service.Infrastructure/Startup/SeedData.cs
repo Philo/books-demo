@@ -1,25 +1,23 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Books.Service.Infrastructure.Startup;
 
-public class SeedData
+public class DbInitializer
 {
     private readonly IBookRepository _books;
     private readonly ILogger _logger;
 
-    public SeedData(IServiceProvider services)
+    public DbInitializer(IBookRepository bookRepository, ILogger<DbInitializer> logger)
     {
-        _books = services.GetService<IBookRepository>();
-        _logger = services.GetService<ILogger<SeedData>>();
+        _books = bookRepository;
+        _logger = logger;
     }
 
-    public async Task Run()
+    public async Task Seed()
     {
         _logger.LogInformation("Beginning data seed");
         foreach(var book in GetSeedData())
@@ -37,13 +35,11 @@ public class SeedData
         }
     }
 
-    private static IEnumerable<Book> GetSeedData()
-    {
-        return new List<Book>
+    private static IEnumerable<Book> GetSeedData() 
+        => new List<Book>
         {
             new Book{ Id = 1, Title = "Winnie-the-pooh", Author = "A. A. Milne", Price = 19.25M },
             new Book{ Id = 2, Title = "Pride and Prejudice", Author = "Jane Austin", Price = 5.49M },
             new Book{ Id = 3, Title = "Romeo and Juliet", Author = "William Shakespeare", Price = 6.95M }
         };
-    }
 }
