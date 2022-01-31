@@ -1,4 +1,5 @@
 using System.Reflection;
+using Books.Service.Infrastructure;
 using Books.Service.Web.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
@@ -7,6 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // Return error message on invalid model
 builder.Services.AddControllers()
