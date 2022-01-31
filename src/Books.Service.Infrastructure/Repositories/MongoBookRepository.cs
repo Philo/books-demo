@@ -23,18 +23,18 @@ public class MongoBookRepository : IBookRepository
         _books = mongoDatabase.GetCollection<Book>(settings.Value.BooksCollectionName);
     }
 
-    public async Task Create(Book book)
+    public async Task CreateAsync(Book book)
         => await _books.InsertOneAsync(book);
 
-    public async Task Delete(long id)
+    public async Task DeleteAsync(long id)
         => await _books.DeleteOneAsync(x => x.Id == id);
 
-    public async Task<Book> GetBook(long id)
+    public async Task<Book> GetBookAsync(long id)
         => await _books.Find(x => x.Id == id).FirstOrDefaultAsync();
 
     public IQueryable<Book> GetBooks()
         => _books.AsQueryable();
 
-    public async Task<Book> Update(Book book)
+    public async Task<Book> UpdateAsync(Book book)
         => await _books.FindOneAndReplaceAsync(x => x.Id == book.Id, book);
 }
