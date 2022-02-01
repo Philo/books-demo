@@ -1,16 +1,16 @@
 using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
-using Books.Service.Infrastructure.Settings;
+using Books.Service.Infrastructure.Mongo;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace Books.Service.Infrastructure.Repositories;
+namespace Books.Service.Infrastructure.Mongo.Repositories;
 
 public class MongoBookRepository : IBookRepository
 {
     private readonly IMongoCollection<Book> _books;
 
-    public MongoBookRepository(IOptions<DatabaseSettings> settings)
+    public MongoBookRepository(IOptions<MongoSettings> settings)
     {
         var mongoClient = new MongoClient(
             settings.Value.ConnectionString);
