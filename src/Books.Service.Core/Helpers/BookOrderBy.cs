@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
 
-namespace Books.Service.Core.Options;
+namespace Books.Service.Core.Helpers;
 
 public class BookOrderBy<T> : IBookOrderBy
 {
