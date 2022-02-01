@@ -11,3 +11,10 @@ steps:
   displayName: 'dotnet build'
 - script: dotnet test ./src
   displayName: 'dotnet test'
+- task: DockerCompose@0
+  displayName: 'docker compose database'
+  inputs:
+    action: 'Run services'
+    dockerComposeFile: '**/docker-compose-db-only.yaml'
+    buildImages: true
+    detached: false
