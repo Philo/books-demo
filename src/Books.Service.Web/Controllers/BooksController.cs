@@ -32,16 +32,20 @@ public class BooksController : ControllerBase
     public async Task<ActionResult<CreateSuccessResponse>> CreateBook([Required] BookDto book) 
     {
         var response = await _mediator.Send(new CreateBookRequest(_mapper.Map<Book>(book)));
-        return new CreateSuccessResponse(response.Id);
+        
+        return new ObjectResult(
+            new CreateSuccessResponse(response.Id))
+            { StatusCode = StatusCodes.Status201Created };
     }      
 
     [HttpGet()] 
     [SwaggerOperation(OperationId = "get-book", Summary = "Returns a list of books. Sorted by title by default.")]
     [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(BookDto), "application/json")]
-    public async Task<IEnumerable<BookDto>> GetBook(SortBy sortby = SortBy.Title)
+    public async Task<ActionResult<IEnumerable<BookDto>>> GetBook(SortBy sortby = SortBy.Title)
     {
         var response = await _mediator.Send(new GetBooksRequest(sortby)); 
-        return _mapper.Map<IEnumerable<BookDto>>(response);
+        
+        return new OkObjectResult(_mapper.Map<IEnumerable<BookDto>>(response));    
     }
 
     [HttpPut("{id}")]
@@ -57,7 +61,9 @@ public class BooksController : ControllerBase
 
         var response = await _mediator.Send(new UpdateBookRequest(_mapper.Map(book, bookEntity)));
 
-        return response != null ? new OkResult() : new NotFoundResult();
+        return response != null ? 
+            new OkResult() : 
+            new NotFoundResult();
     }
 
     [HttpGet("{id}")]
@@ -67,7 +73,10 @@ public class BooksController : ControllerBase
     public async Task<ActionResult<BookDto>> GetBookById([Required] long id)
     {
         var response = await _mediator.Send(new GetBookRequest(id));
-        return response != null ? new OkObjectResult(_mapper.Map<BookDto>(response)) : new NotFoundResult();
+        
+        return response != null ? 
+            new OkObjectResult(_mapper.Map<BookDto>(response)) : 
+            new NotFoundResult();
     }
 
     [HttpDelete("{id}")]
