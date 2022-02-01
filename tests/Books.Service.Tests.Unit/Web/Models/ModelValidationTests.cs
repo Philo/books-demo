@@ -5,7 +5,7 @@ using FluentAssertions;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace Books.Service.Tests.Unit.Web.Validation;
+namespace Books.Service.Tests.Unit.Web.Models;
 
 public class ModelValidationTests 
 {
