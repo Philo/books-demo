@@ -1,6 +1,5 @@
 using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
-using Books.Service.Infrastructure.Mongo;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -23,6 +22,8 @@ public class MongoBookRepository : IBookRepository
 
     public async Task<Book> CreateAsync(Book book)
     {
+        book.Id = IncrementId();
+
         await _books.InsertOneAsync(book);
         return book;
     }
@@ -38,4 +39,10 @@ public class MongoBookRepository : IBookRepository
 
     public async Task<Book> UpdateAsync(Book book)
         => await _books.FindOneAndReplaceAsync(x => x.Id == book.Id, book);
+
+    private long IncrementId()
+    {
+        var lastBook = _books.AsQueryable().OrderByDescending(x => x.Id).FirstOrDefault();
+        return lastBook == null ? 0 : lastBook.Id + 1;
+    }
 }
