@@ -15,8 +15,8 @@ public class SeedData
 
     public SeedData(IServiceProvider services)
     {
-        _books = services.GetService<IBookRepository>();
-        _logger = services.GetService<ILogger<SeedData>>();
+        _books = services.GetService<IBookRepository>()!;
+        _logger = services.GetService<ILogger<SeedData>>()!;
     }
 
     public async Task Run()
@@ -41,9 +41,9 @@ public class SeedData
     {
         return new List<Book>
         {
-            new Book{ Id = 1, Title = "Winnie-the-pooh", Author = "A. A. Milne", Price = 19.25M },
-            new Book{ Id = 2, Title = "Pride and Prejudice", Author = "Jane Austin", Price = 5.49M },
-            new Book{ Id = 3, Title = "Romeo and Juliet", Author = "William Shakespeare", Price = 6.95M }
+            new Book("Winnie-the-pooh", "A. A. Milne", 19.25M){ Id = 1 },
+            new Book("Pride and Prejudice", "Jane Austin", 5.49M){ Id = 2 },
+            new Book("Romeo and Juliet", "William Shakespeare", 6.95M){ Id = 3 }
         };
     }
 }

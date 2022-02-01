@@ -4,6 +4,7 @@ using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
 using Books.Service.Infrastructure.Settings;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Books.Service.Infrastructure.Repositories;
@@ -23,8 +24,11 @@ public class MongoBookRepository : IBookRepository
         _books = mongoDatabase.GetCollection<Book>(settings.Value.BooksCollectionName);
     }
 
-    public async Task CreateAsync(Book book)
-        => await _books.InsertOneAsync(book);
+    public async Task<Book> CreateAsync(Book book)
+    {
+        await _books.InsertOneAsync(book);
+        return book;
+    }
 
     public async Task DeleteAsync(long id)
         => await _books.DeleteOneAsync(x => x.Id == id);

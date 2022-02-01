@@ -6,7 +6,7 @@ namespace Books.Service.Core.Interfaces;
 
 public interface IBookRepository
 {
-    Task CreateAsync(Book book);
+    Task<Book> CreateAsync(Book book);
     IQueryable<Book> GetBooks();
     Task<Book> UpdateAsync(Book book);
     Task<Book> GetBookAsync(long id);
