@@ -1,5 +1,7 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Books.Service.Core.Interfaces;
+using Books.Service.Core.Startup;
 using Books.Service.Infrastructure.Startup;
 using Books.Service.Web.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +11,11 @@ using static System.Net.Mime.MediaTypeNames;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddCoreServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// Return error message on invalid model
+// Configure controllers to return errors on invalid model
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(options =>
     {
@@ -22,6 +26,10 @@ builder.Services.AddControllers()
                     ContentTypes = { Application.Json } 
                 };
             };
+    })
+    .AddJsonOptions(options => 
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
     
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -38,7 +38,7 @@ public class BooksController : ControllerBase
     [HttpGet()] 
     [SwaggerOperation(OperationId = "get-book", Summary = "Returns a list of books. Sorted by title by default.")]
     [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(BookDto), "application/json")]
-    public async Task<IEnumerable<BookDto>> GetBook(SortBy sortby)
+    public async Task<IEnumerable<BookDto>> GetBook(SortBy sortby = SortBy.Title)
     {
         var response = await _mediator.Send(new GetBooksRequest(sortby)); 
         return _mapper.Map<IEnumerable<BookDto>>(response);
@@ -50,7 +50,7 @@ public class BooksController : ControllerBase
     [SwaggerResponse(StatusCodes.Status200OK, "Success")]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad Request", typeof(BadRequestResponse), "application/json")]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Book not found")]
-    public async Task<ActionResult<Book>> UpdateBookById([Required] long id, [Required] [FromBody] BookDto book)
+    public async Task<ActionResult> UpdateBookById([Required] long id, [Required] [FromBody] BookDto book)
     {
         var bookEntity = _mapper.Map<Book>(book);
         bookEntity.Id = id;
@@ -64,10 +64,10 @@ public class BooksController : ControllerBase
     [SwaggerOperation(OperationId = "get-book-by-id", Summary = "Gets a book by id")]
     [SwaggerResponse(StatusCodes.Status200OK, "Success", typeof(BookDto), "application/json")]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Book not found")]
-    public async Task<ActionResult<Book>> GetBookById([Required] long id)
+    public async Task<ActionResult<BookDto>> GetBookById([Required] long id)
     {
         var response = await _mediator.Send(new GetBookRequest(id));
-        return response != null ? new OkObjectResult(response) : new NotFoundResult();
+        return response != null ? new OkObjectResult(_mapper.Map<BookDto>(response)) : new NotFoundResult();
     }
 
     [HttpDelete("{id}")]

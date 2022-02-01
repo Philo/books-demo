@@ -1,10 +1,7 @@
-using System.Linq;
-using System.Threading.Tasks;
 using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
 using Books.Service.Infrastructure.Settings;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Books.Service.Infrastructure.Repositories;
@@ -33,7 +30,7 @@ public class MongoBookRepository : IBookRepository
     public async Task DeleteAsync(long id)
         => await _books.DeleteOneAsync(x => x.Id == id);
 
-    public async Task<Book> GetBookAsync(long id)
+    public async Task<Book?> GetBookAsync(long id)
         => await _books.Find(x => x.Id == id).FirstOrDefaultAsync();
 
     public IQueryable<Book> GetBooks()

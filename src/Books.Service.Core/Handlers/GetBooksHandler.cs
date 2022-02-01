@@ -7,11 +7,11 @@ using MediatR;
 
 namespace Books.Service.Core.Handlers;
 
-public class GetBookHandler : IRequestHandler<GetBooksRequest, IEnumerable<Book>>
+public class GetBooksHandler : IRequestHandler<GetBooksRequest, IEnumerable<Book>>
 {
     private readonly IBookRepository _bookRepository;
  
-    public GetBookHandler(IBookRepository bookRepository)
+    public GetBooksHandler(IBookRepository bookRepository)
     {
         _bookRepository = bookRepository;
     }
@@ -19,12 +19,16 @@ public class GetBookHandler : IRequestHandler<GetBooksRequest, IEnumerable<Book>
     public Task<IEnumerable<Book>> Handle(GetBooksRequest request, CancellationToken cancellationToken)
     {
         var orderByExpression = OrderByOptions()[request.SortBy].Expression;
-        var books = _bookRepository.GetBooks();
-        return Queryable.OrderBy(books, orderByExpression);
+        var books = _bookRepository.GetBooks().ToList().AsQueryable();
+
+        IEnumerable<Book> orderedResults = Queryable.OrderBy(books, orderByExpression);
+
+        return Task.FromResult(orderedResults);
     }
 
     private static Dictionary<SortBy, IBookOrderBy> OrderByOptions()
-        => new() {
+        => new() 
+        {
             { SortBy.Title, new BookOrderBy<string>(x => x.Title) },
             { SortBy.Author, new BookOrderBy<string>(x => x.Author) },
             { SortBy.Price, new BookOrderBy<decimal>(x => x.Price) }
