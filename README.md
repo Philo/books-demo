@@ -15,6 +15,10 @@ A `docker-compose.yaml` file has been provided at the project root which will bu
 A `docker-compose-db-only.yaml` has also been provided which will create only the database. This can be used alongside the VSCode launch configuration to run the project outside of a container. 
 
 ## Libraries
+**General**
+- [AutoMapper](https://automapper.org/)
+- [MediatR](https://github.com/jbogard/MediatR)
+- [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 
 **Testing**
 - [AutoFixture](https://autofixture.github.io/)

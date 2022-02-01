@@ -3,11 +3,10 @@ namespace Books.Service.Core.Entites;
 
 public record Book
 {
-    public long Id { get; init; }
-    public string Title { get; init; }
-    public string Author { get; init; }
-    public decimal Price { get; init;}
-    public Book() { }
+    public long Id { get; set; }
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public decimal Price { get; set;}
     public Book(string title, string author, decimal price)
     {
         Title = title;

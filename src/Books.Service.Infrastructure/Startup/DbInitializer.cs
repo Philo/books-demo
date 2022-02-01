@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -38,8 +36,8 @@ public class DbInitializer
     private static IEnumerable<Book> GetSeedData() 
         => new List<Book>
         {
-            new Book{ Id = 1, Title = "Winnie-the-pooh", Author = "A. A. Milne", Price = 19.25M },
-            new Book{ Id = 2, Title = "Pride and Prejudice", Author = "Jane Austin", Price = 5.49M },
-            new Book{ Id = 3, Title = "Romeo and Juliet", Author = "William Shakespeare", Price = 6.95M }
+            new Book("Winnie-the-pooh", "A. A. Milne", 19.25M){ Id = 1 },
+            new Book("Pride and Prejudice", "Jane Austin", 5.49M){ Id = 2 },
+            new Book("Romeo and Juliet", "William Shakespeare", 6.95M){ Id = 3 }
         };
 }
