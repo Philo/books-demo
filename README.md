@@ -1,4 +1,5 @@
 # Books API
+[![Build Status](https://dev.azure.com/oroberts221/Books/_apis/build/status/owen-roberts.books-api?branchName=feat%2Fazure-pipelines)](https://dev.azure.com/oroberts221/Books/_build/latest?definitionId=1&branchName=feat%2Fazure-pipelines)
 
 ## Architecture 
 The architecture of this service follows [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles and is based on the structure of these .net sample repositories: 
