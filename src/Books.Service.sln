@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Service.Web", "Books.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Service.Tests.Unit", "..\tests\Books.Service.Tests.Unit\Books.Service.Tests.Unit.csproj", "{22C4E752-4781-49AA-89FE-ABEAD53AD699}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Service.Tests.Integration", "..\tests\Books.Service.Tests.Integration\Books.Service.Tests.Integration.csproj", "{580FD089-C614-459F-9539-BE312F9E4051}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{22C4E752-4781-49AA-89FE-ABEAD53AD699}.Release|x64.Build.0 = Release|Any CPU
 		{22C4E752-4781-49AA-89FE-ABEAD53AD699}.Release|x86.ActiveCfg = Release|Any CPU
 		{22C4E752-4781-49AA-89FE-ABEAD53AD699}.Release|x86.Build.0 = Release|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Debug|x64.Build.0 = Debug|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Debug|x86.Build.0 = Debug|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Release|x64.ActiveCfg = Release|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Release|x64.Build.0 = Release|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Release|x86.ActiveCfg = Release|Any CPU
+		{580FD089-C614-459F-9539-BE312F9E4051}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

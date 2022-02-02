@@ -2,18 +2,18 @@ version: '3.7'
 services:
   mongodb:
     image: mongo:5.0
-    container_name: books-api-mongodb
+    container_name: books-api-test-mongodb
     restart: always
     ports:
-      - 27017:27017
+      - 27018:27017
     environment:
       MONGO_INITDB_DATABASE: books-api
       MONGO_INITEXTRA_COLLECTIONNAME: Books
       MONGO_INITDB_ROOT_USERNAME: admin 
       MONGO_INITDB_ROOT_PASSWORD: pass
     volumes:
-      - mongodb-data:/data/db
+      - mongodb-test-data:/data/test-db
       - ./scripts/mongo-init:/docker-entrypoint-initdb.d:ro
     
 volumes:
-  mongodb-data: null
+  mongodb-test-data: null

@@ -1,0 +1,8 @@
+{
+    "DatabaseSettings" : {
+        "ConnectionString": "mongodb://admin:pass@localhost:27018/",
+        "DatabaseName": "books-api",
+        "BooksCollectionName": "Books"
+    }
+}
+  

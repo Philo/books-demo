@@ -8,10 +8,12 @@ namespace Books.Service.Infrastructure.Startup;
 
 public static class RegisterServices
 {
-    public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<MongoSettings>(configuration.GetSection("DatabaseSettings"));
 
         services.AddTransient<IBookRepository, MongoBookRepository>();
+
+        return services;
     }
 }
