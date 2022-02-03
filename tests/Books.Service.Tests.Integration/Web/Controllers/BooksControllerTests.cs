@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Books.Service.Tests.Integration.Base;
 using Books.Service.Web.Models;
 using Books.Service.Web.Responses;
 using FluentAssertions;
@@ -9,7 +10,7 @@ using Xunit;
 namespace Books.Service.Tests.Integration.Web.Controllers;
 
 [Collection("BooksControllerTests")]
-public class BooksControllerTests : BaseWebIntegrationTest
+public class BooksControllerTests : BaseIntegrationTest
 {
     private const string endpoint = "/books";
     public BooksControllerTests() : base() { }

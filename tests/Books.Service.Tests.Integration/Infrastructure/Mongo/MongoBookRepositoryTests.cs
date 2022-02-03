@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using Books.Service.Core.Entites;
 using Books.Service.Core.Interfaces;
+using Books.Service.Tests.Integration.Base;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -11,7 +12,7 @@ using Xunit;
 namespace Books.Service.Tests.Integration.Infrastructure.Mongo;
 
 [Collection("MongoBookRepositoryTests")]
-public class MongoBookRepositoryTests : BaseDatabaseIntegrationTest, IAsyncDisposable
+public class MongoBookRepositoryTests : BaseIntegrationTest, IAsyncDisposable
 {
     private readonly IBookRepository _booksRepository;
 

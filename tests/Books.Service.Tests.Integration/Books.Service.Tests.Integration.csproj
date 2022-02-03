@@ -8,12 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="app-settings-test.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>  
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.17.0" />
     <PackageReference Include="AutoFixture.AutoFakeItEasy" Version="4.17.0" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />

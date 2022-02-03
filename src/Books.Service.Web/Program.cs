@@ -61,11 +61,14 @@ if (app.Environment.IsDevelopment())
 builder.Services.AddLogging();
 
 // Seed database
-var bookRepository = app.Services.GetService<IBookRepository>()!;
-var seedLogger = app.Services.GetService<ILogger<DbInitializer>>()!;
-var dbInitialiser = new DbInitializer(bookRepository, seedLogger);
+if (app.Environment.IsDevelopment())
+{
+    var bookRepository = app.Services.GetService<IBookRepository>()!;
+    var seedLogger = app.Services.GetService<ILogger<DbInitializer>>()!;
+    var dbInitialiser = new DbInitializer(bookRepository, seedLogger);
 
-await dbInitialiser.Seed();
+    await dbInitialiser.Seed();
+}
 
 app.UseHttpsRedirection();
 
