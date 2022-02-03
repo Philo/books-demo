@@ -29,7 +29,7 @@ public class BooksController : ControllerBase
     [SwaggerOperation(OperationId = "create-book", Summary = "Creates a new book")]
     [SwaggerResponse(StatusCodes.Status201Created, "Created", typeof(CreateSuccessResponse), "application/json")]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad Request", typeof(BadRequestResponse), "application/json")]
-    public async Task<ActionResult<CreateSuccessResponse>> CreateBook([Required] BookDto book) 
+    public async Task<ActionResult<CreateSuccessResponse>> CreateBook([Required] [FromBody] BookDto book) 
     {
         var response = await _mediator.Send(new CreateBookRequest(_mapper.Map<Book>(book)));
         
@@ -54,7 +54,7 @@ public class BooksController : ControllerBase
     [SwaggerResponse(StatusCodes.Status200OK, "Success")]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad Request", typeof(BadRequestResponse), "application/json")]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Book not found")]
-    public async Task<ActionResult> UpdateBookById([Required] long id, [Required] BookDto book)
+    public async Task<ActionResult> UpdateBookById([Required] long id, [Required] [FromBody] BookDto book)
     {
         var bookEntity = _mapper.Map<Book>(book);
         bookEntity.Id = id;

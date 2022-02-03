@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using AutoFixture.Xunit2;
 using Books.Service.Web.Models;
 using Books.Service.Web.Responses;
 using FluentAssertions;
@@ -35,15 +34,15 @@ public class BooksControllerTests : BaseWebIntegrationTest
         errors[2].Should().Be("The Author field is required.");
     }
 
-    [Theory, AutoData]
-    public async Task UpdateBook_InvalidBook_ShouldReturnBadRequest(string author, decimal price)
+    [Fact]
+    public async Task UpdateBook_InvalidBook_ShouldReturnBadRequest()
     {
         var book = new BookDto(null!, null!, -1);
 
-        var response = await TestHttpClient.PutObjectAsync($"endpoint/{{book.Id}}", book);
+        var response = await TestHttpClient.PutObjectAsync($"{endpoint}/{book.Id}", book);
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-        
+
         var responseBody = await response.Content.ReadAsObjectAsync<BadRequestResponse>();
 
         responseBody.Should().NotBeNull();
