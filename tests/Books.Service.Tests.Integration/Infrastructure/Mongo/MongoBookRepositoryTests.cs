@@ -46,6 +46,7 @@ public class MongoBookRepositoryTests : BaseIntegrationTest, IAsyncDisposable
         actual.Id.Should().Be(2);
         actual.Should().BeEquivalentTo(expected);
 
+        await _booksRepository.DeleteAsync(1);
         await _booksRepository.DeleteAsync(expected.Id);
     }
 
