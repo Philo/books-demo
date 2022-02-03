@@ -1,6 +1,5 @@
 using System;
 using AutoMapper;
-using Books.Service.Core.Interfaces;
 using Books.Service.Core.Startup;
 using Books.Service.Infrastructure.Startup;
 using Books.Service.Web.Mappings;
@@ -11,6 +10,7 @@ namespace Books.Service.Tests.Integration;
 
 public class Services : IDisposable
 {
+    public ServiceCollection ServiceCollection { get; private set; }
     public ServiceProvider? Provider { get; private set; }
     private bool _disposedValue;
 
@@ -32,6 +32,7 @@ public class Services : IDisposable
         });
         services.AddSingleton(s => mapperConfig.CreateMapper());
 
+        ServiceCollection = services;
         Provider = services.BuildServiceProvider();
     }
 

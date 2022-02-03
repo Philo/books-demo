@@ -3,12 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Books.Service.Tests.Integration;
 
-public class BaseIntegrationTest : IDisposable
+public class BaseDatabaseIntegrationTest : IDisposable
 {
     private readonly Services _services;
     protected ServiceProvider? ServiceProvider {get; private set; }
 
-    public BaseIntegrationTest()
+    public BaseDatabaseIntegrationTest()
     {
         _services = new Services();
         ServiceProvider = _services.Provider;

@@ -54,7 +54,7 @@ public class BooksController : ControllerBase
     [SwaggerResponse(StatusCodes.Status200OK, "Success")]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Bad Request", typeof(BadRequestResponse), "application/json")]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Book not found")]
-    public async Task<ActionResult> UpdateBookById([Required] long id, [Required] [FromBody] BookDto book)
+    public async Task<ActionResult> UpdateBookById([Required] long id, [Required] BookDto book)
     {
         var bookEntity = _mapper.Map<Book>(book);
         bookEntity.Id = id;

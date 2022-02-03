@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using static System.Net.Mime.MediaTypeNames;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -73,3 +74,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//Add program class to make program.cs visible to other projects
+public partial class Program { }
