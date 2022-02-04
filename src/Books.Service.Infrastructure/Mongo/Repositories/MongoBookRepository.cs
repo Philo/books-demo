@@ -43,6 +43,6 @@ public class MongoBookRepository : IBookRepository
     private long IncrementId()
     {
         var lastBook = _books.AsQueryable().OrderByDescending(x => x.Id).FirstOrDefault();
-        return lastBook == null ? 0 : lastBook.Id + 1;
+        return lastBook == null ? 1 : lastBook.Id + 1;
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using static System.Net.Mime.MediaTypeNames;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -60,11 +61,14 @@ if (app.Environment.IsDevelopment())
 builder.Services.AddLogging();
 
 // Seed database
-var bookRepository = app.Services.GetService<IBookRepository>()!;
-var seedLogger = app.Services.GetService<ILogger<DbInitializer>>()!;
-var dbInitialiser = new DbInitializer(bookRepository, seedLogger);
+if (app.Environment.IsDevelopment())
+{
+    var bookRepository = app.Services.GetService<IBookRepository>()!;
+    var seedLogger = app.Services.GetService<ILogger<DbInitializer>>()!;
+    var dbInitialiser = new DbInitializer(bookRepository, seedLogger);
 
-await dbInitialiser.Seed();
+    await dbInitialiser.Seed();
+}
 
 app.UseHttpsRedirection();
 
@@ -73,3 +77,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//Add program class to make program.cs visible to other projects
+public partial class Program { }

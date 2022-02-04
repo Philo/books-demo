@@ -6,8 +6,10 @@ namespace Books.Service.Core.Startup;
 
 public static class RegisterServices
 {
-    public static void AddCoreServices(this IServiceCollection services)
+    public static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
         services.AddMediatR(Assembly.GetExecutingAssembly());
+
+        return services;
     }
 }
