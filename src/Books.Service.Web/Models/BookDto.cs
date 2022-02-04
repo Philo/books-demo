@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Books.Service.Web.Models;
 
 public record BookDto
 {
+    [JsonInclude]
     public long Id { get; private set; }
 
     [Required]

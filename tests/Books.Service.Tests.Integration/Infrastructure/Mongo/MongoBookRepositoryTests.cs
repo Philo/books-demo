@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Books.Service.Tests.Integration.Infrastructure.Mongo;
 
-[Collection("MongoBookRepositoryTests")]
 public class MongoBookRepositoryTests : BaseIntegrationTest, IAsyncDisposable
 {
     private readonly IBookRepository _booksRepository;

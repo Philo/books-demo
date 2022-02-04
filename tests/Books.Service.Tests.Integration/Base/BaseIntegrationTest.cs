@@ -1,9 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
+using Xunit;
 
 namespace Books.Service.Tests.Integration.Base;
 
+[Collection("BooksIntegrationTests")]
 public class BaseIntegrationTest : IDisposable
 {
     public HttpClient TestHttpClient { get; private set;}
