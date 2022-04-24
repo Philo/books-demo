@@ -1,7 +1,7 @@
 trigger:
 - main
 
-pool: atris-dev-local
+pool: self-hosted
 
 variables:
   buildConfiguration: 'Release'
@@ -21,15 +21,16 @@ jobs:
         command: 'build'
         Dockerfile: './src/Books.Service.Web/Dockerfile'
         buildContext: '.'
-- job: test
+- job: run_tests
   displayName: Run Tests
   steps:
-    - task: DockerCompose@0
-      displayName: 'Create database'
-      inputs:
-        action: 'Run services'
-        dockerComposeFile: '**/docker-compose-db-only.yaml'
-        buildImages: true
-        detached: true
+    - script: docker-compose -f docker-compose-db-only.yaml pull
+      displayName: 'Pull images'
+    - script: docker-compose -f docker-compose-db-only.yaml rm -fs
+      displayName: 'Stop and remove any existing containers'
+    - script: docker-compose -f docker-compose-db-only.yaml up --build -d
+      displayName: 'Create database container'
     - script: dotnet test ./src
-      displayName: 'Test'   
+      displayName: 'Run tests'   
+    - script: docker-compose -f docker-compose-db-only.yaml stop -t 1
+      displayName: 'Stop database container'

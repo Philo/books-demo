@@ -1,13 +1,11 @@
 # Books API 
-[![Build Status](https://dev.azure.com/oroberts221/Books/_apis/build/status/owen-roberts.books-api?branchName=main)](https://dev.azure.com/oroberts221/Books/_build/latest?definitionId=1&branchName=main)
+[![Build Status](https://dev.azure.com/owen-personal/Books%20Demo/_apis/build/status/owen-roberts.books-demo?branchName=main)](https://dev.azure.com/owen-personal/Books%20Demo/_build/latest?definitionId=2&branchName=main)
 
 ## Architecture 
 The architecture of this service follows [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles and is based on a similar structure to these .NET sample repositories: 
 - [Clean Architecture Worker Service](https://github.com/ardalis/CleanArchitecture.WorkerService)
 - [Clean Architecture](https://github.com/ardalis/CleanArchitecture#table-of-contents) 
 - [eShopOnWeb](https://github.com/dotnet-architecture/eShopOnWeb)
-
-The intention is to remove any dependencies on the data technology from the presentation (in this case a Web API). 
 
 ## Running locally
 **Docker Compose**
