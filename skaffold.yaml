@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+metadata:
+  name: books
+build:
+  artifacts:
+  - image: books-api
+    context: ./
+    docker:
+      dockerfile: ./src/Books.Service.Web/Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - deploy/api-deployment.yaml
+    - deploy/api-service.yaml
